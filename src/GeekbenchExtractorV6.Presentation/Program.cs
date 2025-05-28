@@ -13,10 +13,24 @@ class Program
             {IsRequired = true};
         fileOption.AddAlias("-f");
 
-        var rootCommand = new RootCommand("Sample app for System.CommandLine");
-        rootCommand.AddOption(fileOption);
+        var delayOption = new Option<int>(
+            name: "--delay",
+            description: "Delay (in milliseconds) between parsing results from URL reports.",
+            getDefaultValue: () => 500
+        );
 
-        rootCommand.SetHandler((file) => 
+        var savePathOptions = new Option<string>(
+            name: "--save-path",
+            description: "The save path for csv files of GeekBench reports."
+            )
+            {IsRequired = true};
+
+        var rootCommand = new RootCommand("App for quick getting results from GeekBench site to .csv file.");
+        rootCommand.AddOption(fileOption);
+        rootCommand.AddOption(delayOption);
+        rootCommand.AddOption(savePathOptions);
+
+        rootCommand.SetHandler(file => 
             { 
                 linkReports = ReadFile(file!); 
             },
