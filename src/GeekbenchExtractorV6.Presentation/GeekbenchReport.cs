@@ -14,6 +14,8 @@ public class GeekbenchReport
         MultiCoreScore = -1;
         ErrorMessage = errorMessage;
     }
+    
+    public int? RecordId { get; set; }
 
     public int SingleCoreScore { get; set; }
 

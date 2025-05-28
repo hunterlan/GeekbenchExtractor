@@ -121,10 +121,10 @@ public class GeekbenchScapper
 
             var benchmarkResult = new BenchmarkResult
             {
-                Name = benchmarkNameNode.InnerText,
+                Name = benchmarkNameNode.InnerText.TrimEnd().TrimStart(),
                 ScoreValue = int.Parse(benchmarkScoreNode.FirstChild.InnerText),
                 OperationValue = double.Parse(operationScore[0]),
-                OperationUnit = operationScore[1],
+                OperationUnit = operationScore[1].TrimEnd().TrimStart(),
             };
             benchmarkResults.Add(benchmarkResult);
         }
