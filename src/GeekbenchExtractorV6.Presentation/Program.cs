@@ -1,12 +1,65 @@
-﻿using GeekbenchExtractorV6.Presentation;
+﻿using System.CommandLine;
 
-var scapper = new GeekbenchScapper();
+namespace GeekbenchExtractorV6.Presentation;
 
-var geekbenchReport = await scapper.ScrapResults("https://browser.geekbench.com/v6/cpu/12171915");
+class Program
+{
+    static async Task<int> Main(string[] args)
+    {
+        IEnumerable<string> linkReports = [];
+        var fileOption = new Option<FileInfo?>(
+            name: "--file",
+            description: "The file that contains URLs to GeekBench reports.")
+            {IsRequired = true};
+        fileOption.AddAlias("-f");
 
-Console.WriteLine(geekbenchReport);
+        var rootCommand = new RootCommand("Sample app for System.CommandLine");
+        rootCommand.AddOption(fileOption);
 
-var csvSerializer = new CsvResultSerializer();
-csvSerializer.SerializeCpuScore([geekbenchReport], "D:\\PetProjectsFilesStorage\\Test");
-csvSerializer.SerializeCoreTests([geekbenchReport], "D:\\PetProjectsFilesStorage\\Test", true);
-csvSerializer.SerializeCoreTests([geekbenchReport], "D:\\PetProjectsFilesStorage\\Test", false);
+        rootCommand.SetHandler((file) => 
+            { 
+                linkReports = ReadFile(file!); 
+            },
+            fileOption);
+        
+        var scapper = new GeekbenchScapper();
+        
+        IList<GeekbenchReport> scarpedGeekbenchReports = [];
+
+        foreach (var linkReport in linkReports)
+        {
+            try
+            {
+
+                scarpedGeekbenchReports.Add(await scapper.ScrapResults(linkReport));
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine($"Unable to parse report. {ex.Message}");
+                return -1;
+            }
+        }
+
+        var csvSerializer = new CsvResultSerializer();
+        try
+        {
+            csvSerializer.SerializeCpuScore(scarpedGeekbenchReports, @"D:\PetProjectsFilesStorage\Test");
+            csvSerializer.SerializeCoreTests(scarpedGeekbenchReports, @"D:\PetProjectsFilesStorage\Test",
+                isWriteSingleCore: true);
+            csvSerializer.SerializeCoreTests(scarpedGeekbenchReports, @"D:\PetProjectsFilesStorage\Test",
+                isWriteSingleCore: false);
+        }
+        catch (Exception ex)
+        {
+            Console.WriteLine($"Unable to write records to file. {ex.Message}");
+            return -1;
+        }
+
+        return await rootCommand.InvokeAsync(args);
+    }
+
+    static IEnumerable<string> ReadFile(FileInfo file)
+    {
+        return File.ReadLines(file.FullName);
+    }
+}
