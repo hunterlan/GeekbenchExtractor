@@ -67,6 +67,7 @@ public class GeekbenchScapper
             return new GeekbenchReport("Information about multi-core tests result are missing."); 
         }
         report.MultiCoreBenchmarkResults = multiCoreResults;
+        report.RecordId = GetRecordId(url);
 
         return report;
     }
@@ -131,4 +132,6 @@ public class GeekbenchScapper
         
         return benchmarkResults;
     }
+
+    private static int GetRecordId(string url) => int.Parse(url.Split("/").Last());
 }

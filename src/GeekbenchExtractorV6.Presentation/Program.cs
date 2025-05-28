@@ -8,6 +8,7 @@ class Program
     {
         IEnumerable<string> linkReports = [];
         string savePath = string.Empty;
+        int delay = 0;
         var fileOption = new Option<FileInfo>(
             name: "--file",
             description: "The file that contains URLs to GeekBench reports.")
@@ -35,6 +36,7 @@ class Program
         {
             linkReports = ReadFile(fileOptionValue);
             savePath = savePathOptionValue;
+            delay = delayOptionValue;
         }, fileOption, delayOption, savePathOptions);
         
         await rootCommand.InvokeAsync(args);
@@ -48,6 +50,7 @@ class Program
             try
             {
                 scarpedGeekbenchReports.Add(await scapper.ScrapResults(linkReport));
+                Thread.Sleep(delay);
             }
             catch (Exception ex)
             {
