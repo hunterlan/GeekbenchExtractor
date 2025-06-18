@@ -12,7 +12,7 @@
     </ItemGroup>
 
     <ItemGroup>
-      <ProjectReference Include="..\..\GeekbenchExtractorV6.Logic\GeekbenchExtractorV6.Logic.csproj" />
+      <ProjectReference Include="..\GeekbenchExtractorV6.Logic\GeekbenchExtractorV6.Logic.csproj" />
     </ItemGroup>
 
 </Project>

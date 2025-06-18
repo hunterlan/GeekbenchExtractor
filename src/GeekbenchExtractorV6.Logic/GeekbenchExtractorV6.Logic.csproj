@@ -9,6 +9,7 @@
         <Authors>Kostiantyn Sharykin</Authors>
         <Company>hunterlan</Company>
         <Product>GeekbenchExtractorV6</Product>
+        <Nullable>enable</Nullable>
     </PropertyGroup>
 
     <ItemGroup>

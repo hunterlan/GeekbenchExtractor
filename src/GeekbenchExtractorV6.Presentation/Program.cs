@@ -5,11 +5,11 @@ using GeekbenchExtractorV6.Logic.ResultSerializers;
 
 namespace GeekbenchExtractorV6.Presentation;
 
-class Program
+internal static class Program
 {
-    static async Task Main(string[] args)
+    private static async Task Main(string[] args)
     {
-        IEnumerable<string> linkReports = [];
+        string[] linkReports = [];
         string savePath = string.Empty;
         int delay = 0;
         var fileOption = new Option<FileInfo>(
@@ -37,13 +37,19 @@ class Program
 
         rootCommand.SetHandler((fileOptionValue, delayOptionValue, savePathOptionValue) =>
         {
-            linkReports = ReadFile(fileOptionValue);
+            linkReports = ReadFile(fileOptionValue).ToArray();
             savePath = savePathOptionValue;
             delay = delayOptionValue;
         }, fileOption, delayOption, savePathOptions);
         
         await rootCommand.InvokeAsync(args);
-        
+
+        if (linkReports.Length is 0)
+        {
+            Console.WriteLine("Failed to read file.");
+            return;
+        }
+
         IList<GeekbenchReport> scarpedGeekbenchReports = [];
 
         foreach (var linkReport in linkReports)
@@ -59,7 +65,7 @@ class Program
             }
         }
 
-        var csvSerializer = new CsvResultSerializer();
+        IResultSerializer csvSerializer = new CsvResultSerializer();
         try
         {
             csvSerializer.SerializeCpuScore(scarpedGeekbenchReports, savePath);
@@ -72,8 +78,6 @@ class Program
         }
     }
 
-    static IEnumerable<string> ReadFile(FileInfo file)
-    {
-        return File.ReadLines(file.FullName);
-    }
+    private static IEnumerable<string> ReadFile(FileInfo file) => 
+        File.Exists(file.FullName) ? File.ReadLines(file.FullName) : [];
 }

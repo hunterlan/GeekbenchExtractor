@@ -34,24 +34,22 @@ public class GeekbenchReport
         {
             return ErrorMessage;
         }
-        else
-        {
-            var sb = new StringBuilder();
-            sb.AppendLine("Single-Core perfomance: " + SingleCoreScore);
-            foreach (var result in SingleCoreBenchmarkResults)
-            {
-                sb.AppendLine($"{result.Name}: {result.ScoreValue} ({result.OperationValue} { result.OperationUnit})");
-            }
 
-            sb.AppendLine("\n");
-            
-            sb.AppendLine("Multi-Core perfomance: " + MultiCoreScore);
-            foreach (var result in MultiCoreBenchmarkResults)
-            {
-                sb.AppendLine($"{result.Name}: {result.ScoreValue} ({result.OperationValue} { result.OperationUnit})");
-            }
-            
-            return sb.ToString();
+        var sb = new StringBuilder();
+        sb.AppendLine("Single-Core performance: " + SingleCoreScore);
+        foreach (var result in SingleCoreBenchmarkResults)
+        {
+            sb.AppendLine($"{result.Name}: {result.ScoreValue} ({result.OperationValue} { result.OperationUnit})");
         }
+
+        sb.AppendLine("\n");
+            
+        sb.AppendLine("Multi-Core performance: " + MultiCoreScore);
+        foreach (var result in MultiCoreBenchmarkResults)
+        {
+            sb.AppendLine($"{result.Name}: {result.ScoreValue} ({result.OperationValue} { result.OperationUnit})");
+        }
+            
+        return sb.ToString();
     }
 }

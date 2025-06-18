@@ -6,13 +6,9 @@ using GeekbenchExtractorV6.Logic.Models;
 
 namespace GeekbenchExtractorV6.Logic.ResultSerializers;
 
-public class CsvResultSerializer
+public class CsvResultSerializer : IResultSerializer
 {
-    /// <summary>
-    /// 
-    /// </summary>
-    /// <param name="reports"></param>
-    /// <param name="path">Should be path to the folder</param>
+    /// <inheritdoc/>
     public void SerializeCpuScore(IEnumerable<GeekbenchReport> reports, string path)
     {
         if (!Directory.Exists(path))
@@ -28,6 +24,7 @@ public class CsvResultSerializer
         }
     }
 
+    /// <inheritdoc/>
     public void SerializeCoreTests(IList<GeekbenchReport> reports, string path, bool isWriteSingleCore)
     {
         string fileName;
