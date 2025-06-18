@@ -2,7 +2,7 @@
 Microsoft Visual Studio Solution File, Format Version 12.00
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GeekbenchExtractorV6.Presentation", "src\GeekbenchExtractorV6.Presentation\GeekbenchExtractorV6.Presentation.csproj", "{2CE21641-4A77-4279-8B03-28A76A2FF722}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GeekbenchExtractorV6.Logic", "GeekbenchExtractorV6.Logic\GeekbenchExtractorV6.Logic.csproj", "{81D2D539-A0B2-420E-BAAE-DF15B0949100}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GeekbenchExtractorV6.Logic", "src\GeekbenchExtractorV6.Logic\GeekbenchExtractorV6.Logic.csproj", "{81D2D539-A0B2-420E-BAAE-DF15B0949100}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

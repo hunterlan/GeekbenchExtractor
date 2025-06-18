@@ -3,7 +3,6 @@ using System.Linq;
 using System.Net.Http;
 using System.Threading.Tasks;
 using GeekbenchExtractorV6.Logic.Models;
-using GeekbenchExtractorV6.Presentation;
 using HtmlAgilityPack;
 
 namespace GeekbenchExtractorV6.Logic;

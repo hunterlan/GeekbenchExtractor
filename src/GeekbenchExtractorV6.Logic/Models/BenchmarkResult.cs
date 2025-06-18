@@ -1,4 +1,4 @@
-﻿namespace GeekbenchExtractorV6.Presentation;
+﻿namespace GeekbenchExtractorV6.Logic.Models;
 
 public class BenchmarkResult
 {
