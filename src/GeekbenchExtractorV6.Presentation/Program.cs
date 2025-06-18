@@ -50,12 +50,17 @@ internal static class Program
             return;
         }
 
+        Console.WriteLine($"File successfully read. Total links: {linkReports.Length}");
+
         IList<GeekbenchReport> scarpedGeekbenchReports = [];
 
         foreach (var linkReport in linkReports)
         {
             try
             {
+                Console.WriteLine($"Scrapping {linkReport}...");
+                GeekbenchReport scrappedReport = await GeekbenchScrapper.GetResultsAsync(linkReport);
+                Console.WriteLine($"Report {(scrappedReport.RecordId.HasValue ? scrappedReport.RecordId.Value : linkReport)} successfully scrapped.");
                 scarpedGeekbenchReports.Add(await GeekbenchScrapper.GetResultsAsync(linkReport));
                 Thread.Sleep(delay);
             }
@@ -71,6 +76,7 @@ internal static class Program
             csvSerializer.SerializeCpuScore(scarpedGeekbenchReports, savePath);
             csvSerializer.SerializeCoreTests(scarpedGeekbenchReports, savePath, isWriteSingleCore: true);
             csvSerializer.SerializeCoreTests(scarpedGeekbenchReports, savePath, isWriteSingleCore: false);
+            Console.WriteLine("Results written to file.");
         }
         catch (Exception ex)
         {
