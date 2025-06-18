@@ -1,6 +1,8 @@
-﻿using System.Text;
+﻿using System.Collections.Generic;
+using System.Text;
+using GeekbenchExtractorV6.Presentation;
 
-namespace GeekbenchExtractorV6.Presentation;
+namespace GeekbenchExtractorV6.Logic.Models;
 
 public class GeekbenchReport
 {

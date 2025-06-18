@@ -1,10 +1,16 @@
-﻿using HtmlAgilityPack;
+﻿using System.Collections.Generic;
+using System.Linq;
+using System.Net.Http;
+using System.Threading.Tasks;
+using GeekbenchExtractorV6.Logic.Models;
+using GeekbenchExtractorV6.Presentation;
+using HtmlAgilityPack;
 
-namespace GeekbenchExtractorV6.Presentation;
+namespace GeekbenchExtractorV6.Logic;
 
-public class GeekbenchScapper
+public static class GeekbenchScrapper
 {
-    public async Task<GeekbenchReport> ScrapResults(string url)
+    public static async Task<GeekbenchReport> GetResultsAsync(string url)
     {
         GeekbenchReport report = new();
         

@@ -2,6 +2,8 @@
 Microsoft Visual Studio Solution File, Format Version 12.00
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GeekbenchExtractorV6.Presentation", "src\GeekbenchExtractorV6.Presentation\GeekbenchExtractorV6.Presentation.csproj", "{2CE21641-4A77-4279-8B03-28A76A2FF722}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GeekbenchExtractorV6.Logic", "GeekbenchExtractorV6.Logic\GeekbenchExtractorV6.Logic.csproj", "{81D2D539-A0B2-420E-BAAE-DF15B0949100}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -12,5 +14,9 @@ Global
 		{2CE21641-4A77-4279-8B03-28A76A2FF722}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{2CE21641-4A77-4279-8B03-28A76A2FF722}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{2CE21641-4A77-4279-8B03-28A76A2FF722}.Release|Any CPU.Build.0 = Release|Any CPU
+		{81D2D539-A0B2-420E-BAAE-DF15B0949100}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{81D2D539-A0B2-420E-BAAE-DF15B0949100}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{81D2D539-A0B2-420E-BAAE-DF15B0949100}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{81D2D539-A0B2-420E-BAAE-DF15B0949100}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 EndGlobal

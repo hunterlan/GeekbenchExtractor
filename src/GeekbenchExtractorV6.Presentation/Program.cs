@@ -1,4 +1,7 @@
 ﻿using System.CommandLine;
+using GeekbenchExtractorV6.Logic;
+using GeekbenchExtractorV6.Logic.Models;
+using GeekbenchExtractorV6.Logic.ResultSerializers;
 
 namespace GeekbenchExtractorV6.Presentation;
 
@@ -41,15 +44,13 @@ class Program
         
         await rootCommand.InvokeAsync(args);
         
-        var scapper = new GeekbenchScapper();
-        
         IList<GeekbenchReport> scarpedGeekbenchReports = [];
 
         foreach (var linkReport in linkReports)
         {
             try
             {
-                scarpedGeekbenchReports.Add(await scapper.ScrapResults(linkReport));
+                scarpedGeekbenchReports.Add(await GeekbenchScrapper.GetResultsAsync(linkReport));
                 Thread.Sleep(delay);
             }
             catch (Exception ex)
